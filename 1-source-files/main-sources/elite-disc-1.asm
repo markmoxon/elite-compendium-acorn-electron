@@ -34,13 +34,6 @@
 
 \ Shared disc files
 
- PUTBASIC "elite-source-code-acorn-electron/1-source-files/basic-programs/load-rom.bas", "ELITESR"
- PUTFILE "elite-source-code-acorn-electron/1-source-files/basic-programs/$.ELITE-disc.bin", "ELITE", &FF0E00, &FF8023
- PUTFILE "elite-source-code-acorn-electron/3-assembled-output/ELITEDA.bin", "ELITEDA", &FF4400, &FF5200
- PUTFILE "elite-source-code-acorn-electron/3-assembled-output/ELTROM1.bin", "ELITER1", &FF8000, &FF8000
- PUTFILE "elite-source-code-acorn-electron/3-assembled-output/ELTROM2.bin", "ELITER2", &FFA000, &FFA000
- PUTFILE "elite-source-code-acorn-electron/3-assembled-output/ELITECO.bin", "ELITECO", &000000, &FFFFFF
-
  PUTFILE "elite-source-code-acorn-electron/3-assembled-output/D.MOA.bin", "D.MOA", &004E00, &004E00
  PUTFILE "elite-source-code-acorn-electron/3-assembled-output/D.MOB.bin", "D.MOB", &004E00, &004E00
  PUTFILE "elite-source-code-acorn-electron/3-assembled-output/D.MOC.bin", "D.MOC", &004E00, &004E00
@@ -57,10 +50,16 @@
  PUTFILE "elite-source-code-acorn-electron/3-assembled-output/D.MON.bin", "D.MON", &004E00, &004E00
  PUTFILE "elite-source-code-acorn-electron/3-assembled-output/D.MOO.bin", "D.MOO", &004E00, &004E00
  PUTFILE "elite-source-code-acorn-electron/3-assembled-output/D.MOP.bin", "D.MOP", &004E00, &004E00
- PUTFILE "elite-source-code-acorn-electron/3-assembled-output/D.MOZ.bin", "D.MOZ", &004E00, &004E00
 
- PUTFILE "elite-source-code-acorn-electron/1-source-files/music/MUSIC1", "M.MUSIC1", &000E00, &000E00
- PUTFILE "elite-source-code-acorn-electron/1-source-files/music/MUSIC2", "M.MUSIC2", &000E00, &000E00
+\ Standard version
+
+ PUTBASIC "elite-source-code-acorn-electron/1-source-files/basic-programs/load-rom.bas", "ELITESR"
+ PUTFILE "elite-source-code-acorn-electron/1-source-files/basic-programs/$.ELITE-disc.bin", "ELITE", &FF0E00, &FF8023
+ PUTFILE "elite-source-code-acorn-electron/3-assembled-output/ELITEDA.bin", "ELITEDA", &FF4400, &FF5200
+ PUTFILE "elite-source-code-acorn-electron/3-assembled-output/ELTROM1.bin", "ELITER1", &FF8000, &FF8000
+ PUTFILE "elite-source-code-acorn-electron/3-assembled-output/ELTROM2.bin", "ELITER2", &FFA000, &FFA000
+ PUTFILE "elite-source-code-acorn-electron/3-assembled-output/ELITECO.bin", "ELITECO", &000000, &FFFFFF
+ PUTFILE "elite-source-code-acorn-electron/3-assembled-output/D.MOZ.bin", "D.MOZ", &004E00, &004E00
 
 \ Commander files
 
