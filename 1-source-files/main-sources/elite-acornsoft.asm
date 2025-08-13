@@ -353,21 +353,25 @@
                         \ restarting from the NOP instruction
 
  EQUB 28                \ Define a text window as follows:
- EQUB 13, 12, 25, 10    \
+ EQUB 13, 5, 25, 3      \
                         \   * Left = 13
                         \   * Right = 25
-                        \   * Top = 10
-                        \   * Bottom = 12
+                        \   * Top = 3
+                        \   * Bottom = 5
                         \
-                        \ i.e. 2 rows high, 12 columns wide at (13, 10)
+                        \ i.e. 2 rows high, 12 columns wide at (13, 3)
 
  EQUB 12                \ Clear the text area
 
  EQUB 26                \ Restore default windows
 
- EQUB 31, 15, 11        \ Move text cursor to 15, 11
+ EQUB 31, 17, 3         \ Move text cursor to 17, 3
 
- EQUS "E L I T E"       \ The name of the game
+ EQUS "ELITE"           \ The name of the game
+
+ EQUB 31, 14, 4         \ Move text cursor to 14, 4
+
+ EQUS "COMPENDIUM"      \ The name of the game
 
  NOP                    \ Marks the end of the VDU block
 
