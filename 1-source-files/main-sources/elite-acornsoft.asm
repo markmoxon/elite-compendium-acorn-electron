@@ -1,6 +1,6 @@
 \ ******************************************************************************
 \
-\ ACORN ELECTRON ACORNSOFT LOGO
+\ ACORN ELECTRON ACORNSOFT LOADING SCREEN
 \
 \ Acorn Electron Elite was written by Ian Bell and David Braben and is copyright
 \ Acornsoft 1984
@@ -19,13 +19,14 @@
 \
 \ ------------------------------------------------------------------------------
 \
-\ This source file code to draw the Acornsoft logo on the Acorn Electron.
+\ This source file code to draw the Acornsoft loading screen on the Acorn
+\ Electron.
 \
 \ ------------------------------------------------------------------------------
 \
 \ This source file produces the following binary file:
 \
-\   * LOGO.bin
+\   * SCREEN.bin
 \
 \ ******************************************************************************
 
@@ -347,10 +348,56 @@
 
  NOP                    \ Marks the end of the VDU block
 
- JSR LOGOS              \ Call LOGOS
+                        \ First we print the standard Elite loading screen with
+                        \ four Acornsoft logos
+
+ JSR jsr5               \ Call jsr5 to print four logos
 
  JSR prstr              \ Call prstr to print the following characters,
                         \ restarting from the NOP instruction
+
+ EQUB 28                \ Define a text window as follows:
+ EQUB 13, 12, 25, 10    \
+                        \   * Left = 13
+                        \   * Right = 25
+                        \   * Top = 10
+                        \   * Bottom = 12
+                        \
+                        \ i.e. 2 rows high, 12 columns wide at (13, 10)
+
+ EQUB 12                \ Clear the text area
+
+ EQUB 26                \ Restore default windows
+
+ EQUB 31, 15, 11        \ Move text cursor to 15, 11
+
+ EQUS "E L I T E"       \ The name of the game
+
+ NOP                    \ Marks the end of the VDU block
+
+                        \ And now we we clear the bottom three logos and print
+                        \ the Compendium header
+
+ LDA #129               \ Calls OSBYTE with A = 129, X = 0 and Y = 20, to read
+ LDX #0                 \ the keyboard with a time limit of (Y X) centiseconds,
+ LDY #1                 \ or 256 centiseconds, or 2.56 seconds
+ JSR OSBYTE
+
+ JSR prstr              \ Call prstr to print the following characters,
+                        \ restarting from the NOP instruction
+
+ EQUB 28                \ Define a text window as follows:
+ EQUB 0, 24, 39, 5       \
+                        \   * Left = 0
+                        \   * Right =39
+                        \   * Top = 5
+                        \   * Bottom = 24
+                        \
+                        \ i.e. the whole screen bar the top Acornsoft logo
+
+ EQUB 12                \ Clear the text area
+
+ EQUB 26                \ Restore default windows
 
  EQUB 28                \ Define a text window as follows:
  EQUB 13, 5, 25, 3      \
@@ -377,10 +424,23 @@
 
  RTS                    \ Return from the PROT1 subroutine
 
- EQUS "         "       \ These bytes appear to be unused
- EQUS "          "
- NOP
- RTS
+.jsr5
+
+ JSR jsr6               \ Call jsr6 . This calls the LOGOS routine twice to
+                        \ print two Acornsoft logos, with a newline between
+                        \ then
+
+ JSR OSNEWL             \ Print two newlines
+ JSR OSNEWL
+
+.jsr6
+
+ JSR LOGOS              \ Call LOGOS to print a third Acornsoft logo
+
+ JSR OSNEWL             \ Print a newline
+
+                        \ Fall through into LOGOS to print a fourth Acornsoft
+                        \ logo and return from the subroutine using a tail call
 
 \ ******************************************************************************
 \
@@ -493,6 +553,6 @@
 \
 \ ******************************************************************************
 
- PRINT "S.LOGO ", ~CODE%, " ", ~P%, " ", ~LOAD%, " ", ~LOAD%
- SAVE "2-assembled-output/LOGO.bin", CODE%, P%, LOAD%
+ PRINT "S.SCREEN ", ~CODE%, " ", ~P%, " ", ~LOAD%, " ", ~LOAD%
+ SAVE "2-assembled-output/SCREEN.bin", CODE%, P%, LOAD%
 
