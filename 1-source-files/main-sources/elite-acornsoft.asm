@@ -257,52 +257,75 @@
 \ Upper character row
 \ Final pixel row is top pixel row of character below
 
- EQUB &00, &00, &00, &00, &00, &00, &00, &00        \ Blank
+ EQUB &00, &00, &00, &00, &00, &00, &00, &00        \ Blank         &A0
 
- EQUB &00, &FF, &FF, &FF, &F0, &F0, &F0, &FF        \ <     ..      above w
+ EQUB &00, &FF, &FF, &FF, &F0, &F0, &F0, &FF        \ <     ..      &A1
                                                     \       xx
+                                                    \       x.      above w
+
+ EQUB &00, &F0, &F0, &F0, &00, &00, &00, &00        \ $     ..      &A2
                                                     \       x.
+                                                    \       ..      above 0, " "
 
- EQUB &00, &F0, &F0, &F0, &00, &00, &00, &00        \ $     ..      above 0, " "
-                                                    \       x.
-                                                    \       ..
-
- EQUB &00, &0F, &0F, &0F, &0F, &0F, &0F, &0F        \ h     ..      above j
+ EQUB &00, &0F, &0F, &0F, &0F, &0F, &0F, &0F        \ h     ..      &A3
                                                     \       .x
-                                                    \       .x
+                                                    \       .x      above j
 
- EQUB &00, &FF, &FF, &FF, &0F, &0F, &0F, &0F        \ l     ..      above j
+ EQUB &00, &FF, &FF, &FF, &0F, &0F, &0F, &0F        \ l     ..      &A4
                                                     \       xx
-                                                    \       .x
+                                                    \       .x      above j
 
- EQUB &00, &FF, &FF, &FF, &FF, &00, &00, &F0        \ ,     ..      above q
+ EQUB &00, &FF, &FF, &FF, &FF, &00, &00, &F0        \ ,     ..      &A5
                                                     \       xx
-                                                    \       ..
+                                                    \       ..      above q
 
 \ Lower row
 \ Top pixel row is in character row above
 
- EQUB &FF, &FF, &F0, &F0, &F0, &FF, &FF, &FF        \ w     xx
+ EQUB &FF, &FF, &F0, &F0, &F0, &FF, &FF, &FF        \ w     xx      &A6
                                                     \       x.
                                                     \       xx
 
- EQUB &00, &00, &00, &00, &00, &F0, &F0, &F0        \ 0     ..
+ EQUB &00, &00, &00, &00, &00, &F0, &F0, &F0        \ 0     ..      &A7
                                                     \       ..
                                                     \       x.
 
- EQUB &0F, &0F, &0F, &0F, &0F, &0F, &0F, &0F        \ j     .x
+ EQUB &0F, &0F, &0F, &0F, &0F, &0F, &0F, &0F        \ j     .x      &A8
                                                     \       .x
                                                     \       .x
 
- EQUB &F0, &F0, &00, &00, &00, &FF, &FF, &FF        \ q     x.
+ EQUB &F0, &F0, &00, &00, &00, &FF, &FF, &FF        \ q     x.      &A9
                                                     \       ..
                                                     \       xx
 
 \ Arrows
 
- EQUB &F0, &F0, &00, &00, &00, &FF, &FF, &FF        \ Right arrow
+ EQUB %00000000                                     \ Right arrow   &AA
+ EQUB %00001000
+ EQUB %00000100
+ EQUB %00111110
+ EQUB %00000100
+ EQUB %00001000
+ EQUB %00000000
+ EQUB %00000000
 
- EQUB &F0, &F0, &00, &00, &00, &FF, &FF, &FF        \ Down arrow
+ EQUB %00000000                                     \ Down arrow    &AB
+ EQUB %00001000
+ EQUB %00001000
+ EQUB %00101010
+ EQUB %00011100
+ EQUB %00001000
+ EQUB %00000000
+ EQUB %00000000
+
+ EQUB %00000000                                     \ Up arrow      &AC
+ EQUB %00001000
+ EQUB %00011100
+ EQUB %00101010
+ EQUB %00001000
+ EQUB %00001000
+ EQUB %00000000
+ EQUB %00000000
 
 \ ******************************************************************************
 \
@@ -500,7 +523,7 @@
 
  BPL vloop2             \ Loop back until we have printed 8 characters
 
- CPY #80               \ Loop back to do the next VDU 23 command until we have
+ CPY #104               \ Loop back to do the next VDU 23 command until we have
  BNE eloop2            \ printed out the whole table
 
  JSR prstr              \ Call prstr to print the following characters,

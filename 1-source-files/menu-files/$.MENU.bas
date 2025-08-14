@@ -25,7 +25,7 @@ ENDPROC
 DEF PROCtitle
 PRINT''"   Elite by Ian Bell and David Braben"
 PRINT"       Enhancements by Mark Moxon"
-PRINT'"^ to select, > for info, RETURN to play";
+PRINT'CHR$(&AB);CHR$(&AC);" to select, ";CHR$(&AA);" for info, RETURN to play";
 ENDPROC
 
 DEF PROCoptions
