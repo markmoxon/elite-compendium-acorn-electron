@@ -1,25 +1,12 @@
-MODE 7
+MODE 6
 *FX 4,1
 *FX 200,1
 VDU 23;8202;0;0;0;
-secpro%=FALSE
-O%=0:A%=&00:X%=&01
-master%=(USR(&FFF4) AND &FF00)=&300
-IF master% THEN PROCnotmaster
-A%=&EA:X%=&00:Y%=&FF
-IF (USR(&FFF4) AND &FF00) THEN secpro%=TRUE
-IF NOT secpro% THEN PROCfixIntegraB
 *RUN SCREEN
-U%=INKEY(200)
-UH$="  "+CHR$(130)
-UL$="  "+CHR$(134)
-HH$=CHR$(132)+CHR$(157)+CHR$(135)
-HL$=CHR$(132)+CHR$(157)+CHR$(135)
-TH$=CHR$(131)+CHR$(157)+CHR$(132)
-TL$=CHR$(131)+CHR$(157)+CHR$(132)
 START%=2
 ROWS%=3
 PROCtitle
+END
 PROCoptions
 PROCselect
 PROCgettitle
@@ -27,6 +14,7 @@ PROCrun
 END
 
 DEF PROCrun
+*FX 12,0
 IF O%=0 PROCbbcdisc
 IF O%=1 PROCsecpro
 IF O%=2 PROCbbccassette
@@ -35,15 +23,9 @@ IF O%=4 PROCeditor
 ENDPROC
 
 DEF PROCtitle
-PRINTTAB(13,2);CHR$(151);CHR$(153);"<$h h l$h,";CHR$(145);CHR$(154)
-PRINTTAB(13,3);CHR$(151);CHR$(153);"w0j0j j jq";CHR$(145);CHR$(154)
-PRINTTAB(13,4);CHR$(135);" COMPENDIUM";CHR$(145);CHR$(154)
-VDU28,0,24,39,5
-CLS
-PRINT'CHR$(130);"   Elite by Ian Bell and David Braben"
-PRINTCHR$(130);"       Enhancements by Mark Moxon"
-PRINT'CHR$(131);"^ to select, ] for info, RETURN to play";
-VDU28,0,24,39,9
+PRINT''"   Elite by Ian Bell and David Braben"
+PRINT"       Enhancements by Mark Moxon"
+PRINT'"^ to select, > for info, RETURN to play";
 ENDPROC
 
 DEF PROCoptions

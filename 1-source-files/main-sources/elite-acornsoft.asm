@@ -30,7 +30,7 @@
 \
 \ ******************************************************************************
 
- GUARD &7C00            \ Guard against assembling over screen memory
+ GUARD &6000            \ Guard against assembling over screen memory
 
 \ ******************************************************************************
 \
@@ -240,6 +240,72 @@
 
 \ ******************************************************************************
 \
+\       Name: ELCHAR
+\       Type: Variable
+\   Category: Loader
+\    Summary: Character definitions for the ELITE wording
+\
+\ ******************************************************************************
+
+.ELCHAR
+
+\ ELITE is spelled out like this:
+\
+\ <$h h l$h,
+\ w0j0j j jq
+
+\ Upper character row
+\ Final pixel row is top pixel row of character below
+
+ EQUB &00, &00, &00, &00, &00, &00, &00, &00        \ Blank
+
+ EQUB &00, &FF, &FF, &FF, &F0, &F0, &F0, &FF        \ <     ..      above w
+                                                    \       xx
+                                                    \       x.
+
+ EQUB &00, &F0, &F0, &F0, &00, &00, &00, &00        \ $     ..      above 0, " "
+                                                    \       x.
+                                                    \       ..
+
+ EQUB &00, &0F, &0F, &0F, &0F, &0F, &0F, &0F        \ h     ..      above j
+                                                    \       .x
+                                                    \       .x
+
+ EQUB &00, &FF, &FF, &FF, &0F, &0F, &0F, &0F        \ l     ..      above j
+                                                    \       xx
+                                                    \       .x
+
+ EQUB &00, &FF, &FF, &FF, &FF, &00, &00, &F0        \ ,     ..      above q
+                                                    \       xx
+                                                    \       ..
+
+\ Lower row
+\ Top pixel row is in character row above
+
+ EQUB &FF, &FF, &F0, &F0, &F0, &FF, &FF, &FF        \ w     xx
+                                                    \       x.
+                                                    \       xx
+
+ EQUB &00, &00, &00, &00, &00, &F0, &F0, &F0        \ 0     ..
+                                                    \       ..
+                                                    \       x.
+
+ EQUB &0F, &0F, &0F, &0F, &0F, &0F, &0F, &0F        \ j     .x
+                                                    \       .x
+                                                    \       .x
+
+ EQUB &F0, &F0, &00, &00, &00, &FF, &FF, &FF        \ q     x.
+                                                    \       ..
+                                                    \       xx
+
+\ Arrows
+
+ EQUB &F0, &F0, &00, &00, &00, &FF, &FF, &FF        \ Right arrow
+
+ EQUB &F0, &F0, &00, &00, &00, &FF, &FF, &FF        \ Down arrow
+
+\ ******************************************************************************
+\
 \       Name: LOADSCR
 \       Type: Subroutine
 \   Category: Loader
@@ -248,6 +314,10 @@
 \ ******************************************************************************
 
 .LOADSCR
+
+ LDA #12                \ Calls OSBYTE with A = 12 and X = 1 to explode the
+ LDX #1                 \ character set so we can redefine characters in the
+ JSR OSBYTE             \ range &A0-&BF on top of the existing &E0-&FF range
 
  LDA #LO(ECHAR)         \ Set ZP(1 0) = ECHAR
  STA ZP
@@ -383,13 +453,63 @@
  LDY #1                 \ or 256 centiseconds, or 2.56 seconds
  JSR OSBYTE
 
+
+
+
+                        \ We now define a character set consisting of "fake"
+                        \ mode 7 graphics characters, but this time for the
+                        \ ELITE title
+
+ LDA #LO(ELCHAR)        \ Set ZP(1 0) = ELCHAR
+ STA ZP
+ LDA #HI(ELCHAR)
+ STA ZP+1
+
+ LDY #0                 \ Set Y to act as an index into the table at ELCHAR
+
+.eloop2
+
+ LDX #7                 \ Set a counter in X for the 8 bytes we need to print
+                        \ from the table for each character definition (one byte
+                        \ per pixel row)
+
+ LDA #23                \ Print character 23 (i.e. VDU 23)
+ JSR OSWRCH
+
+ TYA                    \ We will increase Y by 8 for each character, so this
+ LSR A                  \ sets A = Y / 8 to give the character number, starting
+ LSR A                  \ from 0 and counting up by 1 for each new character
+ LSR A
+
+ ORA #&A0               \ This adds &A0 to A, so our new character set starts
+                        \ with character number &A0, then character number &A1,
+                        \ and so on
+
+ JSR OSWRCH             \ Print the character number (so we have now done the
+                        \ VDU 23, n part of the command)
+
+.vloop2
+
+ LDA (ZP),Y             \ Print the Y-th byte from the ECHAR table (we set ZP to
+ JSR OSWRCH             \ point to ECHAR above)
+
+ INY                    \ Increment the index to point to the next byte in the
+                        \ table
+
+ DEX                    \ Decrement the byte counter
+
+ BPL vloop2             \ Loop back until we have printed 8 characters
+
+ CPY #80               \ Loop back to do the next VDU 23 command until we have
+ BNE eloop2            \ printed out the whole table
+
  JSR prstr              \ Call prstr to print the following characters,
                         \ restarting from the NOP instruction
 
  EQUB 28                \ Define a text window as follows:
- EQUB 0, 24, 39, 5       \
+ EQUB 0, 24, 39, 5      \
                         \   * Left = 0
-                        \   * Right =39
+                        \   * Right = 39
                         \   * Top = 5
                         \   * Bottom = 24
                         \
@@ -400,21 +520,25 @@
  EQUB 26                \ Restore default windows
 
  EQUB 28                \ Define a text window as follows:
- EQUB 13, 5, 25, 3      \
+ EQUB 13, 5, 25, 2      \
                         \   * Left = 13
                         \   * Right = 25
-                        \   * Top = 3
+                        \   * Top = 2
                         \   * Bottom = 5
                         \
-                        \ i.e. 2 rows high, 12 columns wide at (13, 3)
+                        \ i.e. 3 rows high, 12 columns wide at (13, 2)
 
  EQUB 12                \ Clear the text area
 
  EQUB 26                \ Restore default windows
 
- EQUB 31, 17, 3         \ Move text cursor to 17, 3
+ EQUB 31, 14, 2         \ Move text cursor to 14, 2
 
- EQUS "ELITE"           \ The name of the game
+ EQUB &A1, &A2, &A3, &A0, &A3, &A0, &A4, &A2, &A3, &A5      \ <$h h l$h,
+
+ EQUB 31, 14, 3         \ Move text cursor to 14, 3
+
+ EQUB &A6, &A7, &A8, &A7, &A8, &A0, &A8, &A0, &A8, &A9      \ w0j0j j jq
 
  EQUB 31, 14, 4         \ Move text cursor to 14, 4
 
