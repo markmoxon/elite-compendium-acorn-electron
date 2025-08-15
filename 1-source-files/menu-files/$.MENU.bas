@@ -3,10 +3,17 @@ MODE 6
 *FX 200,1
 VDU 23;8202;0;0;0;
 *RUN SCREEN
+UH$="   "
+UL$="   "
+HH$=" | "
+HL$=" | "
+UT$="                                        "
+UB$="                                        "
+HT$=" "+CHR$(&AD)+"------------------------------------"+CHR$(&AE)+" "
+HB$=" "+CHR$(&AF)+"------------------------------------"+CHR$(&B0)+" "
 START%=2
 ROWS%=3
 PROCtitle
-END
 PROCoptions
 PROCselect
 PROCgettitle
@@ -14,18 +21,16 @@ PROCrun
 END
 
 DEF PROCrun
-*FX 12,0
-IF O%=0 PROCbbcdisc
-IF O%=1 PROCsecpro
-IF O%=2 PROCbbccassette
-IF O%=3 PROCteletext
-IF O%=4 PROCeditor
+IF O%=0 PROCcompendium
+IF O%=1 PROCmusic
+IF O%=2 PROCflickerfree
 ENDPROC
 
 DEF PROCtitle
 PRINT''"   Elite by Ian Bell and David Braben"
 PRINT"       Enhancements by Mark Moxon"
 PRINT'CHR$(&AB);CHR$(&AC);" to select, ";CHR$(&AA);" for info, RETURN to play";
+VDU28,0,24,39,9
 ENDPROC
 
 DEF PROCoptions
@@ -34,7 +39,7 @@ READ T$,V$
 Y%=START%
 C%=0
 REPEAT
-PROChl(Y%,UH$,UL$)
+PROChl(Y%,UH$,UL$,UT$,UB$)
 PROCsh(Y%,T$)
 PROCsh(Y%+1,V$)
 Y%=Y%+ROWS%
@@ -51,14 +56,14 @@ NEXT
 CLS
 PROCsh(2,T$)
 PROCsh(3,V$)
-PROChl(2,TH$,TL$)
+PROChl(2,HH$,HL$,HT$,HB$)
 PRINT'
 ENDPROC
 
 DEF PROCselect
 L%=(O%+1)MOD C%
 REPEAT
-IF O%<>L% THEN PROChl(START%+L%*ROWS%,UH$,UL$):PROChl(START%+O%*ROWS%,HH$,HL$)
+IF O%<>L% THEN PROChl(START%+L%*ROWS%,UH$,UL$,UT$,UB$):PROChl(START%+O%*ROWS%,HH$,HL$,HT$,HB$)
 L%=O%
 K%=GET
 IF K%=138 THEN O%=(O%+1)MOD C%
@@ -67,150 +72,88 @@ IF K%=136 OR K%=137 THEN PROCinfo
 UNTIL K%=13
 ENDPROC
 
-DEF PROCbbcdisc
-IF secpro% THEN PROCdisablesecpro
-*DRIVE 2
-CHAIN "ELITED"
-ENDPROC
-
-DEF PROCsecpro
-IF NOT secpro% THEN PROCenablesecpro
-*DRIVE 2
-CHAIN "ELITE65"
-ENDPROC
-
-DEF PROCbbccassette
-IF secpro% THEN PROCdisablesecpro
+DEF PROCcompendium
+IF PAGE>&1E00 THEN PROCpagetoohigh
+*FX 12,0
 *DRIVE 2
 CHAIN "ELITEC"
 ENDPROC
 
-DEF PROCteletext
-IF secpro% THEN PROCdisablesecpro
+DEF PROCmusic
+IF PAGE>&F00 THEN PROCmusicalpagetoohigh
+*FX 12,0
 *DRIVE 2
-CHAIN "ELITETT"
+CHAIN "ELITEM"
 ENDPROC
 
-DEF PROCeditor
-IF NOT secpro% THEN PROCenablesecpro
+DEF PROCflickerfree
+*FX 12,0
 *DRIVE 2
-*DIR V
-*RUN ELITEUE
+CHAIN "ELITEF"
 ENDPROC
 
 DEF PROCsh(Y%,T$)
 LOCAL X%
-X%=21-LEN(T$)/2
+X%=20-LEN(T$)/2
 PRINTTAB(X%,Y%);T$;
 ENDPROC
 
-DEF PROChl(Y%,T$,U$)
-PRINTTAB(0,Y%);T$;
-PRINTTAB(0,Y%+1);U$;
+DEF PROChl(Y%,T$,U$,A$,B$)
+PRINTTAB(0,Y%);T$;TAB(37,Y%);T$;
+PRINTTAB(0,Y%+1);U$;TAB(37,Y%+1);U$;
+PRINTTAB(0,Y%-1);A$;
+PRINTTAB(0,Y%+2);B$;
 ENDPROC
 
 DEF PROCinfo
 PROCgettitle
-PRINTTAB(0,0);CHR$(131);"       ] for menu, RETURN to play";
-FOR I%=5TO13:PRINTTAB(0,I%);CHR$(134);:NEXT
-PRINTTAB(0,14);CHR$(130);
-PRINTTAB(0,15);CHR$(130);
-IF O%=0 PROCsh(5,"The classic 1984 BBC Micro release"):PROCsh(6,"with the following enhancements"):PROCsh(8,"Flicker-free ships and planets")
-IF O%=0 PROCsh(9,"Music and sounds with volume control"):PROCsh(10,"Docking computer improvements"):PROCsh(11,"The epic Trumbles mission"):PROCsh(12,"Joystick and fuel scoop improvements")
-IF O%=1 PROCsh(5,"Fast Elite with the following extras"):PROCsh(7,"Flicker-free ships and planets"):PROCsh(8,"Music and sounds with volume control")
-IF O%=1 PROCsh(9,"Docking computer improvements"):PROCsh(10,"The epic Trumbles mission"):PROCsh(11,"Speed adjusted to be playable"):PROCsh(12,"Bug fixes and more")
-IF O%=2 PROCsh(5,"The classic 1984 BBC Micro release"):PROCsh(6,"with the following enhancements"):PROCsh(8,"Flicker-free ships and planets")
-IF O%=2 PROCsh(9,"Music and sounds with volume control"):PROCsh(10,"Joystick and fuel scoop improvements"):PROCsh(11,"Save and load commanders from disc")
-IF O%=3 PROCsh(5,"The classic 1984 BBC Micro release"):PROCsh(6,"with the following enhancements"):PROCsh(8,"Converted to run entirely in teletext")
-IF O%=3 PROCsh(9,"Flicker-free ships and planets"):PROCsh(10,"Music and sounds with volume control"):PROCsh(11,"Trumbles & improved docking computer"):PROCsh(12,"Ceefax option for the market page")
-IF O%=4 PROCsh(5,"Create your own 3D scenarios in Elite"):PROCsh(6,"and "+CHR$(34)+"Press play"+CHR$(34)+" to bring them to life"):PROCsh(8,"Comes with lots of example universes")
-IF O%=4 PROCsh(9,"including the iconic screenshot from"):PROCsh(10,"the back of the Acornsoft box"):PROCsh(12,"See bbcelite.com/hacks for instructions")
-IF O%=0 OR O%=2 OR O%=3 PROCsh(14,"For the BBC Micro with 16K sideways RAM")
-IF O%=1 PROCsh(14,"For the BBC Micro + co-pro + 16K SRAM")
-IF O%=4 PROCsh(14,"For the BBC Micro + 6502 co-processor")
+PRINTTAB(0,0);"        ";CHR$(&AA);" for menu, RETURN to play";
+IF O%=0 PROCsh(5,"The classic 1984 Electron release"):PROCsh(6,"with the following enhancements"):PROCsh(8,"All the features of BBC Micro Elite")
+IF O%=0 PROCsh(9,"Flicker-free ships and planets"):PROCsh(10,"Docking computer improvements"):PROCsh(11,"The epic Trumbles mission"):PROCsh(12,"Joystick and fuel scoop improvements")
+IF O%=1 PROCsh(5,"The classic 1984 Electron release"):PROCsh(6,"with the following enhancements"):PROCsh(8,"All the features of BBC Micro Elite")
+IF O%=1 PROCsh(9,"Music (title screen and docking)"):PROCsh(10,"Flicker-free ships and planets"):PROCsh(11,"Docking computer improvements"):PROCsh(12,"Trumbles, joystick improvements etc.")
+IF O%=2 PROCsh(5,"The classic 1984 Electron release"):PROCsh(6,"with the following enhancements"):PROCsh(8,"Flicker-free ships and planets")
+IF O%=2 PROCsh(9,"Higher fidelity planets"):PROCsh(10,"More stardust particle sizes"):PROCsh(11,"Save and load commanders from disc")
+IF O%=0 PROCsh(14,"For the Electron with 16K sideways RAM")
+IF O%=1 PROCsh(14,"For the Electron & 16K SRAM & E00 disc")
+IF O%=2 PROCsh(14,"For the standard Acorn Electron")
 PROCsh(15,"See www.bbcelite.com for more details")
 REPEAT
 K%=GET
 UNTIL K%=136 OR K%=137 OR K%=13
 IF K%=13 PROCgettitle:PROCrun
 CLS
-PROCtitle
+PRINT CHR$(&AB);CHR$(&AC);" to select, ";CHR$(&AA);" for info, RETURN to play";
 PROCoptions
-PROChl(START%+O%*ROWS%,HH$,HL$)
+PROChl(START%+O%*ROWS%,HH$,HL$,HT$,HB$)
 L%=O%
 ENDPROC
 
-DEF PROCnotmaster
+DEF PROCpagetoohigh
 PRINT"Sorry, this version of the Elite"
-PRINT"Compendium only works on a BBC Micro."
-PRINT'"There is a separate version for the"
-PRINT"BBC Master. See bbcelite.com/hacks for"
-PRINT"more details."
+PRINT"Compendium only works when PAGE"
+PRINT"is &1D00 or lower, and PAGE is"
+PRINT"currently &";STR$~PAGE;"."
+PRINT'"Please free up more memory and"
+PRINT"try again."
 END
 ENDPROC
 
-DEF PROCdisablesecpro
-VDU26
-CLS
-PRINT"Sorry, this version of Elite will not"
-PRINT"run on a 6502 Second Processor."
-PRINT
-PRINT"Please unplug your co-processor and"
-PRINT"try booting the disc again."
+DEF PROCmusicalpagetoohigh
+PRINT"Sorry, this version of the Elite"
+PRINT"Compendium only works when PAGE"
+PRINT"is &0E00 or lower, and PAGE is"
+PRINT"currently &";STR$~PAGE;"."
+PRINT'"Please free up more memory and"
+PRINT"try again."
 END
-ENDPROC
-
-DEF PROCenablesecpro
-VDU26
-CLS
-PRINT"Sorry, this version of Elite needs a"
-PRINT"6502 Second Processor."
-PRINT
-PRINT"Please plug in your co-processor and"
-PRINT"try booting the disc again."
-END
-ENDPROC
-
-DEF PROCfixIntegraB
-DIM CODE% 50
-P%=CODE%
-ZP=&70
-[OPT 0
-.IntegraFix
- SEI
- LDA &FFB7
- STA ZP
- LDA &FFB8
- STA ZP+1
- LDY #&A
-.prlp1
- LDA (ZP),Y
- STA &0200,Y
- INY
- CPY #&12
- BNE prlp1
- LDY #&2A
-.prlp2
- LDA (ZP),Y
- STA &0200,Y
- INY
- CPY #&30
- BNE prlp2
- CLI
- RTS
-]
-CALL IntegraFix
 ENDPROC
 
 REM  "----------------------------------"
-DATA "BBC Micro disc Elite"
+DATA "Compendium Elite on the Electron"
+DATA "Super-fast & packed with features"
+DATA "Compendium Elite... with music!"
+DATA "With added docking and title tunes"
+DATA "Flicker-free Electron Elite"
 DATA "The best version of original Elite"
-DATA "6502 Second Processor Elite"
-DATA "The best version of co-pro Elite"
-DATA "BBC Micro cassette Elite"
-DATA "The best version of tape Elite"
-DATA "Teletext Elite"
-DATA "Classic Elite with added Ceefax"
-DATA "Elite Universe Editor"
-DATA "Create fully playable 3D scenarios"
 DATA "",""

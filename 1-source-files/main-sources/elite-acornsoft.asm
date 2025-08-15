@@ -327,6 +327,42 @@
  EQUB %00000000
  EQUB %00000000
 
+ EQUB %00000000                                     \ Top-left corner       &AD
+ EQUB %00000000
+ EQUB %00000000
+ EQUB %00000110
+ EQUB %00001100
+ EQUB %00001100
+ EQUB %00011000
+ EQUB %00011000
+
+ EQUB %00000000                                     \ Top-right corner      &AE
+ EQUB %00000000
+ EQUB %00000000
+ EQUB %01100000
+ EQUB %00110000
+ EQUB %00110000
+ EQUB %00011000
+ EQUB %00011000
+
+ EQUB %00011000                                     \ Bottom-left corner    &AF
+ EQUB %00001100
+ EQUB %00001100
+ EQUB %00000110
+ EQUB %00000000
+ EQUB %00000000
+ EQUB %00000000
+ EQUB %00000000
+
+ EQUB %00011000                                     \ Bottom-right corner   &B0
+ EQUB %00110000
+ EQUB %00110000
+ EQUB %01100000
+ EQUB %00000000
+ EQUB %00000000
+ EQUB %00000000
+ EQUB %00000000
+
 \ ******************************************************************************
 \
 \       Name: LOADSCR
@@ -523,8 +559,8 @@
 
  BPL vloop2             \ Loop back until we have printed 8 characters
 
- CPY #104               \ Loop back to do the next VDU 23 command until we have
- BNE eloop2            \ printed out the whole table
+ CPY #136               \ Loop back to do the next VDU 23 command until we have
+ BNE eloop2             \ printed out the whole table
 
  JSR prstr              \ Call prstr to print the following characters,
                         \ restarting from the NOP instruction
