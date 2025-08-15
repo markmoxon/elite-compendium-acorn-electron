@@ -11,8 +11,8 @@ UT$="                                        "
 UB$="                                        "
 HT$=" "+CHR$(&AD)+"------------------------------------"+CHR$(&AE)+" "
 HB$=" "+CHR$(&AF)+"------------------------------------"+CHR$(&B0)+" "
-START%=2
-ROWS%=3
+START%=3
+ROWS%=4
 PROCtitle
 PROCoptions
 PROCselect
@@ -112,8 +112,8 @@ IF O%=0 PROCsh(5,"The classic 1984 Electron release"):PROCsh(6,"with the followi
 IF O%=0 PROCsh(9,"Flicker-free ships and planets"):PROCsh(10,"Docking computer improvements"):PROCsh(11,"The epic Trumbles mission"):PROCsh(12,"Joystick and fuel scoop improvements")
 IF O%=1 PROCsh(5,"The classic 1984 Electron release"):PROCsh(6,"with the following enhancements"):PROCsh(8,"All the features of BBC Micro Elite")
 IF O%=1 PROCsh(9,"Music (title screen and docking)"):PROCsh(10,"Flicker-free ships and planets"):PROCsh(11,"Docking computer improvements"):PROCsh(12,"Trumbles, joystick improvements etc.")
-IF O%=2 PROCsh(5,"The classic 1984 Electron release"):PROCsh(6,"with the following enhancements"):PROCsh(8,"Flicker-free ships and planets")
-IF O%=2 PROCsh(9,"Higher fidelity planets"):PROCsh(10,"More stardust particle sizes"):PROCsh(11,"Save and load commanders from disc")
+IF O%=2 PROCsh(5,"The classic 1984 Electron release"):PROCsh(6,"with the following enhancements"):PROCsh(8,"Flicker-free ships")
+IF O%=2 PROCsh(9,"Flicker-free planets"):PROCsh(10,"Higher fidelity planet circles"):PROCsh(11,"More stardust particle sizes"):PROCsh(12,"Save and load commanders from disc")
 IF O%=0 PROCsh(14,"For the Electron with 16K sideways RAM")
 IF O%=1 PROCsh(14,"For the Electron & 16K SRAM & E00 disc")
 IF O%=2 PROCsh(14,"For the standard Acorn Electron")
