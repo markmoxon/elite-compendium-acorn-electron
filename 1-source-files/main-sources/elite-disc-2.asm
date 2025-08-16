@@ -32,15 +32,26 @@
  PUTBASIC "1-source-files/menu-files/$.MENU.bas", "MENU"
  PUTFILE "2-assembled-output/SCREEN.bin", "SCREEN", &005700, &005700
 
+\ Standard version
+
+ PUTBASIC "elite-source-code-acorn-electron/1-source-files/basic-programs/load-rom.bas", "ELITEC"
+ PUTFILE "elite-source-code-acorn-electron/1-source-files/basic-programs/$.ELITE-disc.bin", "ELITEC2", &FF0E00, &FF8023
+ PUTFILE "elite-source-code-acorn-electron/3-assembled-output/ELITEDA.bin", "ELITECD", &FF4400, &FF5200
+ PUTFILE "elite-source-code-acorn-electron/3-assembled-output/ELTROM1.bin", "ELITER1", &FF8000, &FF8000
+ PUTFILE "elite-source-code-acorn-electron/3-assembled-output/ELTROM2.bin", "ELITER2", &FFA000, &FFA000
+ PUTFILE "elite-source-code-acorn-electron/3-assembled-output/ELITECO.bin", "ELITECC", &000000, &FFFFFF
+
 \ Musical version
 
- PUTBASIC "elite-source-code-acorn-electron-music/1-source-files/basic-programs/load-rom.bas", "ELITESR"
- PUTFILE "elite-source-code-acorn-electron-music/1-source-files/basic-programs/$.ELITE-disc.bin", "ELITE", &FF0E00, &FF8023
- PUTFILE "elite-source-code-acorn-electron-music/3-assembled-output/ELITEDA.bin", "ELITEDA", &FF4400, &FF5200
- PUTFILE "elite-source-code-acorn-electron-music/3-assembled-output/ELTROM1.bin", "ELITER1", &FF8000, &FF8000
- PUTFILE "elite-source-code-acorn-electron-music/3-assembled-output/ELTROM2.bin", "ELITER2", &FFA000, &FFA000
- PUTFILE "elite-source-code-acorn-electron-music/3-assembled-output/ELITECO.bin", "ELITECO", &000000, &FFFFFF
- PUTFILE "elite-source-code-acorn-electron-music/3-assembled-output/D.MOZ.bin", "D.MOZ", &004E00, &004E00
+ PUTBASIC "elite-source-code-acorn-electron-music/1-source-files/basic-programs/load-rom.bas", "ELITEM"
+ PUTFILE "elite-source-code-acorn-electron-music/1-source-files/basic-programs/$.ELITE-disc.bin", "ELITEM2", &FF0E00, &FF8023
+ PUTFILE "elite-source-code-acorn-electron-music/3-assembled-output/ELITEDA.bin", "ELITEMD", &FF4400, &FF5200
+ PUTFILE "elite-source-code-acorn-electron-music/3-assembled-output/ELTROM1.bin", "ELITER3", &FF8000, &FF8000
+ PUTFILE "elite-source-code-acorn-electron-music/3-assembled-output/ELTROM2.bin", "ELITER4", &FFA000, &FFA000
+ PUTFILE "elite-source-code-acorn-electron-music/3-assembled-output/ELITECO.bin", "ELITEMC", &000000, &FFFFFF
 
- PUTFILE "elite-source-code-acorn-electron-music/1-source-files/music/MUSIC1", "M.MUSIC1", &000E00, &000E00
- PUTFILE "elite-source-code-acorn-electron-music/1-source-files/music/MUSIC2", "M.MUSIC2", &000E00, &000E00
+\ Flicker-free
+
+ PUTFILE "elite-source-code-acorn-electron-flicker-free/1-source-files/basic-programs/$.ELITE-disc.bin", "ELITE", &FF0E00, &FF8023
+ PUTFILE "elite-source-code-acorn-electron-flicker-free/3-assembled-output/ELITECO.bin", "ELITECO", &000000, &FFFFFF
+ PUTFILE "elite-source-code-acorn-electron-flicker-free/3-assembled-output/ELITEDA.bin", "ELITEDA", &FF4400, &FF5200

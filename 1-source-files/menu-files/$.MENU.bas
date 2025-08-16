@@ -75,21 +75,18 @@ ENDPROC
 DEF PROCcompendium
 IF PAGE>&1E00 THEN PROCpagetoohigh
 *FX 12,0
-*DRIVE 2
-CHAIN "ELITEC"
+PAGE=&1D00:CHAIN "ELITEC"
 ENDPROC
 
 DEF PROCmusic
 IF PAGE>&F00 THEN PROCmusicalpagetoohigh
 *FX 12,0
-*DRIVE 2
-CHAIN "ELITEM"
+PAGE=&0E00:CHAIN "ELITEM"
 ENDPROC
 
 DEF PROCflickerfree
 *FX 12,0
-*DRIVE 2
-CHAIN "ELITEF"
+PAGE=&1D00:CHAIN "ELITE"
 ENDPROC
 
 DEF PROCsh(Y%,T$)
@@ -113,7 +110,7 @@ IF O%=0 PROCsh(9,"Flicker-free ships and planets"):PROCsh(10,"Docking computer i
 IF O%=1 PROCsh(5,"The classic 1984 Electron release"):PROCsh(6,"with the following enhancements"):PROCsh(8,"All the features of BBC Micro Elite")
 IF O%=1 PROCsh(9,"Music (title screen and docking)"):PROCsh(10,"Flicker-free ships and planets"):PROCsh(11,"Docking computer improvements"):PROCsh(12,"Trumbles, joystick improvements etc.")
 IF O%=2 PROCsh(5,"The classic 1984 Electron release"):PROCsh(6,"with the following enhancements"):PROCsh(8,"Flicker-free ships")
-IF O%=2 PROCsh(9,"Flicker-free planets"):PROCsh(10,"Higher fidelity planet circles"):PROCsh(11,"More stardust particle sizes"):PROCsh(12,"Save and load commanders from disc")
+IF O%=2 PROCsh(9,"Flicker-free planets"):PROCsh(10,"Higher fidelity planet circles"):PROCsh(11,"More stardust particle sizes"):PROCsh(12,"Save/load commanders to tape only")
 IF O%=0 PROCsh(14,"For the Electron with 16K sideways RAM")
 IF O%=1 PROCsh(14,"For the Electron & 16K SRAM & E00 disc")
 IF O%=2 PROCsh(14,"For the standard Acorn Electron")
@@ -155,5 +152,5 @@ DATA "Super-fast & packed with features"
 DATA "Compendium Elite... with music!"
 DATA "With added docking and title tunes"
 DATA "Flicker-free Electron Elite"
-DATA "The best version of original Elite"
+DATA "The best version of cassette Elite"
 DATA "",""
