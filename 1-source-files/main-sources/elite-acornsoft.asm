@@ -346,22 +346,32 @@
  EQUB %00011000
 
  EQUB %00011000                                     \ Bottom-left corner    &AF
+ EQUB %00011000
  EQUB %00001100
  EQUB %00001100
  EQUB %00000110
  EQUB %00000000
  EQUB %00000000
  EQUB %00000000
- EQUB %00000000
 
  EQUB %00011000                                     \ Bottom-right corner   &B0
+ EQUB %00011000
  EQUB %00110000
  EQUB %00110000
  EQUB %01100000
  EQUB %00000000
  EQUB %00000000
  EQUB %00000000
+
+ EQUB %00000000                                     \ Bottom box line   &B1
  EQUB %00000000
+ EQUB %00000000
+ EQUB %00000000
+ EQUB %01111110
+ EQUB %00000000
+ EQUB %00000000
+ EQUB %00000000
+
 
 \ ******************************************************************************
 \
@@ -559,7 +569,7 @@
 
  BPL vloop2             \ Loop back until we have printed 8 characters
 
- CPY #136               \ Loop back to do the next VDU 23 command until we have
+ CPY #144               \ Loop back to do the next VDU 23 command until we have
  BNE eloop2             \ printed out the whole table
 
  JSR prstr              \ Call prstr to print the following characters,
