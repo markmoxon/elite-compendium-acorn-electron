@@ -58,8 +58,8 @@
 \ Musical version
 
  PUTFILE "elite-source-code-acorn-electron-music/3-assembled-output/D.MOZ.bin", "D.MOY", &004E00, &004E00
- PUTFILE "elite-source-code-acorn-electron-music/1-source-files/music/MUSIC1", "M.MUSIC1", &000E00, &000E00
- PUTFILE "elite-source-code-acorn-electron-music/1-source-files/music/MUSIC2", "M.MUSIC2", &000E00, &000E00
+ PUTFILE "elite-source-code-acorn-electron-music/elk-elite-music/output/elite/MUSIC1", "M.MUSIC1", &000E00, &000E00
+ PUTFILE "elite-source-code-acorn-electron-music/elk-elite-music/output/elite/MUSIC2", "M.MUSIC2", &000E00, &000E00
 
 \ Commander files
 
