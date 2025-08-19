@@ -3,6 +3,7 @@ MODE 6
 *FX 200,1
 VDU 23;8202;0;0;0;
 *RUN SCREEN
+O%=0
 UH$="   "
 UL$="   "
 HH$=" | "
@@ -76,18 +77,18 @@ ENDPROC
 
 DEF PROCcompendium
 IF PAGE>&1E00 THEN PROCpagetoohigh
-*FX 12,0
+*FX 20,0
 PAGE=&1D00:CHAIN "ELITEC"
 ENDPROC
 
 DEF PROCmusic
 IF PAGE>&F00 THEN PROCmusicalpagetoohigh
-*FX 12,0
+*FX 20,0
 PAGE=&0E00:CHAIN "ELITEM"
 ENDPROC
 
 DEF PROCflickerfree
-*FX 12,0
+*FX 20,0
 PAGE=&1D00:CHAIN "ELITE"
 ENDPROC
 
@@ -132,7 +133,7 @@ DEF PROCpagetoohigh
 PRINT"Sorry, this version of the Elite"
 PRINT"Compendium only works when PAGE"
 PRINT"is &1D00 or lower, and PAGE is"
-PRINT"currently &";STR$~PAGE;"."
+PRINT"currently &";STR$~(PAGE-&100);"."
 PRINT'"Please free up more memory and"
 PRINT"try again."
 END
@@ -142,7 +143,7 @@ DEF PROCmusicalpagetoohigh
 PRINT"Sorry, this version of the Elite"
 PRINT"Compendium only works when PAGE"
 PRINT"is &0E00 or lower, and PAGE is"
-PRINT"currently &";STR$~PAGE;"."
+PRINT"currently &";STR$~(PAGE-&100);"."
 PRINT'"Please free up more memory and"
 PRINT"try again."
 END
