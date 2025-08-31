@@ -117,7 +117,7 @@ IF O%=2 PROCsh(9,"Flicker-free planets"):PROCsh(10,"Higher fidelity planet circl
 IF O%=0 PROCsh(14,"For the Electron with 16K sideways RAM")
 IF O%=1 PROCsh(14,"For the Electron & 16K SRAM & E00 disc")
 IF O%=2 PROCsh(14,"For the standard Acorn Electron")
-PROCsh(15,"See www.bbcelite.com for more details")
+PROCsh(15,"See bbcelite.com/hacks for details")
 REPEAT
 K%=GET
 UNTIL K%=136 OR K%=137 OR K%=13
@@ -130,22 +130,22 @@ L%=O%
 ENDPROC
 
 DEF PROCpagetoohigh
-PRINT"Sorry, this version of the Elite"
-PRINT"Compendium only works when PAGE"
-PRINT"is &1D00 or lower, and PAGE is"
-PRINT"currently &";STR$~(PAGE-&100);"."
-PRINT'"Please free up more memory and"
-PRINT"try again."
+PRINT" I'm sorry, this version of the"
+PRINT" Elite Compendium only works when"
+PRINT" PAGE is &1D00 or lower, and PAGE"
+PRINT" is currently &";STR$~(PAGE-&100);"."
+PRINT'" Please free up more memory and"
+PRINT" try again."'
 END
 ENDPROC
 
 DEF PROCmusicalpagetoohigh
-PRINT"Sorry, this version of the Elite"
-PRINT"Compendium only works when PAGE"
-PRINT"is &0E00 or lower, and PAGE is"
-PRINT"currently &";STR$~(PAGE-&100);"."
-PRINT'"Please free up more memory and"
-PRINT"try again."
+PRINT" I'm sorry, this version of the"
+PRINT" Elite Compendium only works when"
+PRINT" PAGE is &0E00 or lower, and PAGE"
+PRINT" is currently &";STR$~(PAGE-&100);"."
+PRINT'" Please free up more memory and"
+PRINT" try again."'
 END
 ENDPROC
 
