@@ -4,11 +4,11 @@ BEEBASM?=beebasm
 all:
 	$(BEEBASM) -i 1-source-files/main-sources/elite-acornsoft.asm
 	$(BEEBASM) -i 1-source-files/main-sources/elite-readme.asm
-	$(BEEBASM) -i 1-source-files/main-sources/elite-disc-1.asm -do 2-assembled-output/side1.ssd -opt 3 -title "Compendium"
-	$(BEEBASM) -i 1-source-files/main-sources/elite-disc-2.asm -do 2-assembled-output/side2.ssd -title "Compendium"
+	$(BEEBASM) -i 1-source-files/main-sources/elite-disc-1.asm -do 2-assembled-output/side1.ssd -opt 3 -title "CompendiumE0"
+	$(BEEBASM) -i 1-source-files/main-sources/elite-disc-2.asm -do 2-assembled-output/side2.ssd -title "CompendiumE2"
 	dfsimage create 3-compiled-game-discs/elite-compendium-acorn-electron.dsd
-	dfsimage backup --title="Compendium" --bootopt=EXEC --from 2-assembled-output/side1.ssd --to -1 3-compiled-game-discs/elite-compendium-acorn-electron.dsd
-	dfsimage backup --title="Compendium" --from 2-assembled-output/side2.ssd --to -2 3-compiled-game-discs/elite-compendium-acorn-electron.dsd
+	dfsimage backup --title="Compendium E" --bootopt=EXEC --from 2-assembled-output/side1.ssd --to -1 3-compiled-game-discs/elite-compendium-acorn-electron.dsd
+	dfsimage backup --title="Compendium E" --from 2-assembled-output/side2.ssd --to -2 3-compiled-game-discs/elite-compendium-acorn-electron.dsd
 	cp 2-assembled-output/side1.ssd 3-compiled-game-discs/elite-compendium-acorn-electron-drive-0.ssd
 	cp 2-assembled-output/side2.ssd 3-compiled-game-discs/elite-compendium-acorn-electron-drive-2.ssd
 
