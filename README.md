@@ -40,7 +40,7 @@ The commentary is copyright &copy; Mark Moxon. Any misunderstandings or mistakes
 
 Huge thanks are due to the original authors for not only creating such an important piece of my childhood, but also for releasing the source code for us to play with; to Paul Brink for his annotated disassembly; and to Kieran Connell for his [BeebAsm version](https://github.com/kieranhj/elite-beebasm), which I forked as the original basis for this project. You can find more information about this project in the [accompanying website's project page](https://elite.bbcelite.com/about_site/about_this_project.html).
 
-Thanks to the Bitshifters for their help in building the musical version of BBC Micro Elite, and in particular Kieran Connell, Simon Morris and Negative Charge for the music player and ported music files. Thanks also to Tricky and J.G.Harston for their sideways RAM utilities, and a big thank you to Wouter Hobers (haerfest on Stardot) for his original sideways RAM version.
+Thanks to the Bitshifters for their help in building the musical version of BBC Micro Elite, and in particular Kieran Connell, Simon Morris and Negative Charge for the music player and ported music files. Huge thanks also to Wouter Hobers (haerfest on Stardot) for his original sideways RAM version, from which I have taken both inspiration and the sideways RAM loader code.
 
 The following archives from Ian Bell's personal website forms the basis for this project:
 

@@ -33,29 +33,27 @@
  EQUS "Acornsoft Elite (Compendium version)"
  EQUB 10, 13
  EQUB 10, 13
- EQUS "For the BBC Micro with 16K sideways RAM"
+ EQUS "For the Electron with 16K sideways RAM"
  EQUB 10, 13
  EQUB 10, 13
- EQUS "Contains flicker-free routines, music"
+ EQUS "Flicker-free routines, bug fixes and"
  EQUB 10, 13
- EQUS "and lots of other hacks by Mark Moxon"
+ EQUS "other enhancements by Mark Moxon"
  EQUB 10, 13
  EQUB 10, 13
- EQUS "Sound routines by Kieran Connell and"
- EQUB 10, 13
- EQUS "Simon Morris"
+ EQUS "Sound routines by Negative Charge"
  EQUB 10, 13
  EQUB 10, 13
  EQUS "Original music by Aidan Bell and Julie"
  EQUB 10, 13
  EQUS "Dunn (c) D. Braben and I. Bell 1985,"
  EQUB 10, 13
- EQUS "ported from the C64 by Negative Charge"
+ EQUS "ported from MIDI by Negative Charge"
  EQUB 10, 13
  EQUB 10, 13
- EQUS "Sideways RAM detection and loading"
+ EQUS "Sideways RAM loader, routines and"
  EQUB 10, 13
- EQUS "routines by Tricky and J.G.Harston"
+ EQUS "inspiration by Wouter Hobers"
  EQUB 10, 13
  EQUB 10, 13
 
