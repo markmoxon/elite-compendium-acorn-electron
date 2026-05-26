@@ -8,8 +8,8 @@ beebtools create $image -t 80 --title "Compendium E" --boot EXEC
 
 # Boot files
 
-beebtools add $image 2-assembled-output/README.txt --name $.README --load FFFFFFFF --exec FFFFFFFF
 beebtools add $image 1-source-files/boot-files/$.!BOOT-adfs.bin --name $.!BOOT --load FFFFFFFF --exec FFFFFFFF
+beebtools add $image 2-assembled-output/README.txt --name $.README --load FFFFFFFF --exec FFFFFFFF
 
 # Shared disc files
 
