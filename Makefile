@@ -7,7 +7,7 @@ ADL?=3-compiled-game-discs/elite-compendium-acorn-electron.adl
 all: build-ssd build-dsd build-adl
 
 .PHONY:build-ssd
-build:
+build-ssd:
 	$(BEEBASM) -i 1-source-files/main-sources/elite-acornsoft.asm
 	$(BEEBASM) -i 1-source-files/main-sources/elite-readme.asm
 	$(BEEBASM) -i 1-source-files/main-sources/elite-disc-1.asm -do 3-compiled-game-discs/elite-compendium-acorn-electron-drive-0.ssd -opt 3 -title "CompendiumE0"
