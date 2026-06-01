@@ -24,7 +24,7 @@ The Elite Compendium is a collection of the very best of Acornsoft Elite, update
 
 This repository contains submodules for each of the individual programs on the disc. Each submodule points to a branch that contains the version of that program to be included in the Compendium disc.
 
-The repository also contains the menu code and a build process for producing DSD and ADL disc images, as well as two SSD images for use with SD cards. The SSD images are produced by BeebAsm, and the DSD and ADL images are created using the [beebtools Python library](https://github.com/acscpt/beebtools), which can be installed with a `pip install beebtools` command.
+The repository also contains the menu code and a build process for producing DSD and ADL disc images, as well as two SSD images for use with SD cards. The SSD images are produced by BeebAsm, and the DSD and ADL images are created using the [oaknut-disc Python tool](https://rob-smallshire.github.io/oaknut/disc/index.html), which can be installed using `pip install oaknut-disc` (pipx, uv and uvx are also supported).
 
 See the individual subprojects for more information.
 
