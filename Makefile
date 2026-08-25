@@ -1,7 +1,7 @@
 BEEBASM?=beebasm
 DISC?=oaknut-disc
 DSD?=3-compiled-game-discs/elite-compendium-acorn-electron.dsd
-ADL?=3-compiled-game-discs/elite-compendium-acorn-electron.adl
+ADF?=3-compiled-game-discs/elite-compendium-acorn-electron.adf
 
 .PHONY:all
 all: build-ssd build-dsd build-adl
@@ -22,9 +22,9 @@ build-dsd:
 
 .PHONY:build-adl
 build-adl:
-	$(DISC) create $(ADL) --title "Compendium E"
-	$(DISC) opt $(ADL) EXEC
-	$(DISC) cp -r "3-compiled-game-discs/elite-compendium-acorn-electron-drive-0.ssd:*" $(ADL)
-	$(DISC) cp -r "3-compiled-game-discs/elite-compendium-acorn-electron-drive-2.ssd:*" $(ADL)
-	$(DISC) rm $(ADL):$$.!BOOT 
-	$(DISC) put $(ADL):$$.!BOOT 1-source-files/boot-files/$$.!BOOT-adfs.bin --load 0xFFFFFFFF --exec 0xFFFFFFFF
+	$(DISC) create $(ADF) --title "Compendium E" --geometry m
+	$(DISC) opt $(ADF) EXEC
+	$(DISC) cp -r "3-compiled-game-discs/elite-compendium-acorn-electron-drive-0.ssd:*" $(ADF)
+	$(DISC) cp -r "3-compiled-game-discs/elite-compendium-acorn-electron-drive-2.ssd:*" $(ADF)
+	$(DISC) rm $(ADF):$$.!BOOT 
+	$(DISC) put $(ADF):$$.!BOOT 1-source-files/boot-files/$$.!BOOT-adfs.bin --load 0xFFFFFFFF --exec 0xFFFFFFFF
