@@ -747,5 +747,5 @@
 \ ******************************************************************************
 
  PRINT "S.SCREEN ", ~CODE%, " ", ~P%, " ", ~LOAD%, " ", ~LOAD%
- SAVE "2-assembled-output/SCREEN.bin", CODE%, P%, LOAD%
+ SAVE "3-assembled-output/SCREEN.bin", CODE%, P%, LOAD%
 

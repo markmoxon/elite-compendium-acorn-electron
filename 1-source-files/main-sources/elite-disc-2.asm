@@ -30,7 +30,7 @@
 \ Menu
 
  PUTBASIC "1-source-files/menu-files/$.MENU.bas", "MENU"
- PUTFILE "2-assembled-output/SCREEN.bin", "SCREEN", &005700, &005700
+ PUTFILE "3-assembled-output/SCREEN.bin", "SCREEN", &005700, &005700
 
 \ Standard version
 
