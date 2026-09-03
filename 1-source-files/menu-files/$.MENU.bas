@@ -24,7 +24,7 @@ PROCrun
 END
 
 DEF PROCrun
-IF O%=0 PROCcompendium
+IF O%=0 PROCbbcmicro
 IF O%=1 PROCmusic
 IF O%=2 PROCflickerfree
 ENDPROC
@@ -75,7 +75,7 @@ IF K%=136 OR K%=137 THEN PROCinfo
 UNTIL K%=13
 ENDPROC
 
-DEF PROCcompendium
+DEF PROCbbcmicro
 IF PAGE>&1E00 THEN PROCpagetoohigh
 *FX 20,0
 PAGE=&1D00:CHAIN "ELITEC"
@@ -150,9 +150,9 @@ END
 ENDPROC
 
 REM  "----------------------------------"
-DATA "Compendium Elite on the Electron"
+DATA "BBC Micro Elite on the Electron"
 DATA "Super-fast & packed with features"
-DATA "Compendium Elite... with music!"
+DATA "BBC Micro Elite... with music!"
 DATA "Two tunes and Delta 14B/1 support"
 DATA "Flicker-free Electron Elite"
 DATA "The best version of cassette Elite"
