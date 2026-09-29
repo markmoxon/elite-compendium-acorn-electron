@@ -26,5 +26,5 @@ build-adl:
 	$(DISC) opt $(ADF) EXEC
 	$(DISC) cp -r "4-compiled-game-discs/elite-compendium-acorn-electron-drive-0.ssd:*" $(ADF)
 	$(DISC) cp -r "4-compiled-game-discs/elite-compendium-acorn-electron-drive-2.ssd:*" $(ADF)
-	$(DISC) rm $(ADF):$$.!BOOT 
+	$(DISC) rm $(ADF):$$.!BOOT
 	$(DISC) put $(ADF):$$.!BOOT 1-source-files/boot-files/$$.!BOOT-adfs.bin --load 0xFFFFFFFF --exec 0xFFFFFFFF
